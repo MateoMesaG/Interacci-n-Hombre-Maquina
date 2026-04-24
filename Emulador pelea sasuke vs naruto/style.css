@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* FONDO */
+body {
+  background-color: #111;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+/* TITULO */
+h1 {
+  color: orange;
+  margin-bottom: 20px;
+}
+
+/* IMAGEN PRINCIPAL */
+img:first-of-type {
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* CONTENEDOR DE PERSONAJES */
+#stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+/* TARJETAS */
+.stat-bloque {
+  background-color: #1f1f1f;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 15px;
+  width: 220px;
+}
+
+/* IMAGEN PERSONAJE */
+.stat-bloque img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* NOMBRES */
+h3 {
+  color: orange;
+  margin: 10px 0;
+}
+
+/* BARRAS */
+.barra-track {
+  width: 100%;
+  height: 12px;
+  background-color: #333;
+  border-radius: 10px;
+  margin: 5px 0 10px;
+}
+
+/* VIDA */
+.hp {
+  height: 100%;
+  background-color: red;
+  border-radius: 10px;
+}
+
+/* CHAKRA */
+.chakra {
+  height: 100%;
+  background-color: blue;
+  border-radius: 10px;
+}
+
+/* TRANSICIONES */
+.hp, .chakra {
+  transition: width 0.3s;
+}
+
+/* BOTONES */
+#acciones {
+  margin: 20px 0;
+}
+
+#acciones button {
+  padding: 10px 15px;
+  margin: 5px;
+  background-color: #222;
+  color: white;
+  border: 1px solid orange;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* HOVER */
+#acciones button:hover {
+  background-color: orange;
+  color: black;
+}
+
+/* LOG */
+#log {
+  width: 60%;
+  margin: auto;
+  background-color: #1f1f1f;
+  border: 1px solid #333;
+  height: 150px;
+  overflow-y: auto;
+  padding: 10px;
+  text-align: left;
+  border-radius: 10px;
+}

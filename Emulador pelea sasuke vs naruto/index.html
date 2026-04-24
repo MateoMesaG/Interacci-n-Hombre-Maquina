@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Naruto vs Sasuke</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>NARUTO vs SASUKE</h1>
+
+<img src="https://i.pinimg.com/originals/ef/08/98/ef0898195ef7ed33f7b72e76e58116a2.gif" width="600">
+
+<br><br>
+
+<!-- PERSONAJES -->
+<div id="stats">
+
+  <!-- NARUTO -->
+  <div class="stat-bloque">
+    <h3>NARUTO</h3>
+    <img src="Assets/Naruto.png" width="200">
+
+    <p>HP: <span id="naruto-hp">320</span></p>
+    <div class="barra-track">
+      <div id="naruto-hp-barra" class="hp"></div>
+    </div>
+
+    <p>Chakra: <span id="naruto-chakra">120</span></p>
+    <div class="barra-track">
+      <div id="naruto-chakra-barra" class="chakra"></div>
+    </div>
+  </div>
+
+  <!-- SASUKE -->
+  <div class="stat-bloque">
+    <h3>SASUKE</h3>
+    <img src="Assets/Sasuke.png" width="200">
+
+    <p>HP: <span id="sasuke-hp">280</span></p>
+    <div class="barra-track">
+      <div id="sasuke-hp-barra" class="hp"></div>
+    </div>
+
+    <p>Chakra: <span id="sasuke-chakra">120</span></p>
+    <div class="barra-track">
+      <div id="sasuke-chakra-barra" class="chakra"></div>
+    </div>
+  </div>
+
+</div>
+
+<br>
+
+<!-- BOTONES -->
+<div id="acciones">
+  <button onclick="accion('golpe')">Golpe</button>
+  <button onclick="accion('kunai')">Kunai</button>
+  <button onclick="accion('jutsu')">Jutsu</button>
+  <button onclick="accion('recargar')">Recargar Chakra</button>
+  <button onclick="reiniciar()">Reiniciar pelea</button>
+</div>
+
+<br><br>
+
+<!-- LOG -->
+<div id="log"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
