@@ -1,0 +1,145 @@
+body {
+  margin: 0;
+  background: #000000;
+  color: white;
+}
+
+/* NAV */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: black;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  box-sizing: border-box; 
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  margin: 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+/*CARRUSEL*/
+.carousel-item img {
+  height: 400px;
+  object-fit: cover;
+}
+
+.carousel-caption h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/*CARDS*/
+.custom-card {
+  background: #2f2f4f;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  color: white;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.custom-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+.card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* SECCIONES */
+.section {
+  min-height: 100vh;
+  padding-top: 100px;
+  background-color: #2f2f4f;
+}
+
+
+.section1 {
+  min-height: 100vh;
+  padding-top: 100px;
+  text-align: center;
+  
+}
+
+.sec2 
+{
+
+  min-height: 100vh;
+  padding-top: 100px;
+  text-align: center;
+
+}
+
+/* CANVAS */
+canvas {
+  width: 80%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9; 
+  display: block;
+  margin: 20px auto;
+  border: 1px solid white;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: black;
+}
+button
+{
+  padding: 10px 15px;
+  margin: 5px;
+  background-color: #222;
+  color: white;
+  border: 1px solid orange;
+  border-radius: 8px;
+  cursor: pointer
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.hero-text {
+  width: 50%;
+  padding: 150px;
+}
+
+.hero-canvas {
+  width: 80%;
+  height: 400px;
+}
+
+.hero-canvas canvas {
+  width: 90%;
+  height: 90%;
+  display: block;
+}
