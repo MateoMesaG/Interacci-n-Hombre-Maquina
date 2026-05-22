@@ -1,218 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3legant - Shop Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameZone - Tienda Gamer</title>
 
-  <!-- Fuente parecida al Figma -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Iconos -->
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-  <!-- Vue -->
+  <!-- Librería Vue.js -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-  <!-- CSS -->
+  <!-- Iconos sencillos -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+  <!-- Estilos -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <div id="app">
 
     <!-- Barra superior -->
-    <div class="topbar" v-if="showTopbar">
-      <div class="topbar-content">
-        <p>
-          <i class='bx bx-purchase-tag'></i>
-          <span>30% off storewide — Limited time!</span>
-          <a href="#">Shop Now <i class='bx bx-right-arrow-alt'></i></a>
-        </p>
-
-        <button class="topbar-close" @click="closeTopbar">×</button>
-      </div>
+    <div class="barra" v-if="mostrarBarra">
+      <p>🎮 30% de descuento en accesorios gamer</p>
+      <button @click="cerrarBarra">X</button>
     </div>
 
-    <!-- Header -->
+    <!-- Encabezado -->
     <header class="header">
-      <div class="container header-content">
-        <div class="logo">3legant.</div>
 
-        <nav class="nav desktop-nav">
-          <a href="#" class="active">Home</a>
-          <a href="#">Shop</a>
-          <a href="#">Product</a>
-          <a href="#">Contact Us</a>
-        </nav>
-
-        <div class="header-icons">
-          <a href="#"><i class='bx bx-search'></i></a>
-          <a href="#"><i class='bx bx-user-circle'></i></a>
-          <a href="#"><i class='bx bx-heart'></i></a>
-          <a href="#" class="cart-icon">
-            <i class='bx bx-shopping-bag'></i>
-            <span class="cart-count">{{ cartCount }}</span>
-          </a>
-        </div>
+      <!-- Logo con imagen de fondo -->
+      <div class="logo">
+        GameZone.
       </div>
+
+      <nav class="menu">
+        <a href="#">Inicio</a>
+        <a href="#">Tienda</a>
+        <a href="#">Productos</a>
+        <a href="#">Contacto</a>
+      </nav>
+
+      <div class="carrito">
+        <i class="bx bx-shopping-bag"></i>
+        <span>{{ carrito }}</span>
+      </div>
+
     </header>
 
-    <!-- Hero -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-box">
-          <div class="hero-overlay">
-            <p class="breadcrumb">Home <span>›</span> <strong>Shop</strong></p>
-            <h1>Shop Page</h1>
-            <p class="hero-subtitle">Let’s design the place you always imagined.</p>
-          </div>
-        </div>
+    <!-- Banner principal -->
+    <section class="banner">
+      <div class="banner-texto">
+        <p>Inicio › Tienda</p>
+        <h1>Gaming Shop</h1>
+        <h2>Equipa tu setup gamer con los mejores productos.</h2>
+      </div>
+    </section>
+    <section>
+      <div>
+        
       </div>
     </section>
 
-    <!-- Shop -->
-    <main class="shop-section">
-      <div class="container">
+    <!-- Contenido tienda -->
+    <main class="contenedor">
 
-        <!-- filtros -->
-        <div class="shop-toolbar">
-          <div class="filters-left">
-            <div class="filter-group">
-              <label>CATEGORIES</label>
-              <select v-model="selectedCategory">
-                <option value="all">Living Room</option>
-                <option value="living">Living Room</option>
-                <option value="bedroom">Bedroom</option>
-                <option value="decor">Decor</option>
-              </select>
-            </div>
+      <!-- Filtros -->
+      <section class="filtros">
 
-            <div class="filter-group">
-              <label>PRICE</label>
-              <select v-model="selectedPrice">
-                <option value="all">All Price</option>
-                <option value="0-20">$0 - $20</option>
-                <option value="20-100">$20 - $100</option>
-                <option value="100+">$100+</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="toolbar-right">
-            <div class="sort-box">
-              <span>Sort by</span>
-              <i class='bx bx-chevron-down'></i>
-            </div>
-
-            <div class="view-switch">
-              <button><i class='bx bxs-grid'></i></button>
-              <button><i class='bx bx-grid-alt'></i></button>
-              <button class="active"><i class='bx bx-pause'></i></button>
-              <button><i class='bx bx-menu'></i></button>
-            </div>
-          </div>
+        <div>
+          <label>CATEGORÍA</label>
+          <select v-model="categoriaSeleccionada">
+            <option value="all">Todos</option>
+            <option value="consolas">Consolas</option>
+            <option value="accesorios">Accesorios</option>
+            <option value="juegos">Juegos</option>
+            <option value="setup">Setup Gamer</option>
+          </select>
         </div>
 
-        <!-- productos -->
-        <section class="products-grid">
-          <article class="product-item" v-for="product in visibleProducts" :key="product.id">
-
-            <div class="product-image-box">
-              <span class="badge new" v-if="product.isNew">NEW</span>
-              <span class="badge discount" v-if="product.discount">-{{ product.discount }}%</span>
-              <img :src="product.image" :alt="product.name">
-            </div>
-
-            <div class="product-info">
-              <div class="stars">★★★★★</div>
-
-              <div class="title-row">
-                <h3>{{ product.name }}</h3>
-                <button class="wishlist-mobile" @click="toggleWishlist(product)">
-                  <i class='bx bx-heart'></i>
-                </button>
-              </div>
-
-              <div class="price-row">
-                <span class="current-price">${{ product.price }}</span>
-                <span class="old-price" v-if="product.oldPrice">${{ product.oldPrice }}</span>
-              </div>
-
-              <p class="description">{{ product.description }}</p>
-
-              <button class="btn-cart" @click="addToCart(product)">Add to cart</button>
-
-              <button class="wishlist-btn" @click="toggleWishlist(product)">
-                <i class='bx bx-heart'></i> Wishlist
-              </button>
-            </div>
-          </article>
-        </section>
-
-        <div class="show-more-wrapper" v-if="visibleCount < filteredProducts.length">
-          <button class="show-more-btn" @click="showMore">Show more</button>
+        <div>
+          <label>PRECIO</label>
+          <select v-model="precioSeleccionado">
+            <option value="all">Todos</option>
+            <option value="bajo">$0 - $100</option>
+            <option value="medio">$101 - $400</option>
+            <option value="alto">$401+</option>
+          </select>
         </div>
 
-      </div>
+        <div>
+          <label>ORDENAR</label>
+          <select v-model="ordenSeleccionado">
+            <option value="normal">Normal</option>
+            <option value="menor">Menor precio</option>
+            <option value="mayor">Mayor precio</option>
+          </select>
+        </div>
+
+      </section>
+
+      <!-- Productos -->
+      <section class="productos">
+
+        <article class="producto" v-for="producto in productosFiltrados" :key="producto.id">
+
+          <div class="imagen-producto">
+            <span class="etiqueta" v-if="producto.nuevo">NEW</span>
+            <span class="descuento" v-if="producto.descuento">
+              -{{ producto.descuento }}%
+            </span>
+
+            <img :src="producto.imagen" :alt="producto.nombre">
+          </div>
+
+          <div class="info-producto">
+            <p class="estrellas">★★★★★</p>
+
+            <h3>{{ producto.nombre }}</h3>
+
+            <p class="precio">
+              ${{ producto.precio }}
+              <span v-if="producto.precioAnterior">
+                ${{ producto.precioAnterior }}
+              </span>
+            </p>
+
+            <p class="descripcion">
+              {{ producto.descripcion }}
+            </p>
+
+            <button class="btn-carrito" @click="agregarCarrito(producto)">
+              Añadir al carrito
+            </button>
+
+            <button class="btn-wishlist" @click="agregarWishlist(producto)">
+              ♡ Wishlist
+            </button>
+          </div>
+
+        </article>
+
+      </section>
+
+      <p class="sin-productos" v-if="productosFiltrados.length === 0">
+        No hay productos con esos filtros.
+      </p>
+
     </main>
 
     <!-- Newsletter -->
     <section class="newsletter">
-      <div class="newsletter-inner">
-        <div class="newsletter-content">
-          <h2>Join Our Newsletter</h2>
-          <p>Sign up for deals, new products and promotions</p>
+      <h2>Únete a la comunidad gamer</h2>
+      <p>Recibe ofertas y lanzamientos exclusivos.</p>
 
-          <form class="newsletter-form" @submit.prevent="subscribeEmail">
-            <div class="input-row">
-              <i class='bx bx-envelope'></i>
-              <input type="email" v-model="email" placeholder="Email address">
-              <button type="submit">Signup</button>
-            </div>
-          </form>
+      <form @submit.prevent="registrarCorreo">
+        <input 
+          type="email" 
+          placeholder="Correo electrónico"
+          v-model="correo"
+        >
+        <button>Registrarme</button>
+      </form>
 
-          <small class="newsletter-msg" v-if="newsletterMessage">{{ newsletterMessage }}</small>
-        </div>
-      </div>
+      <small v-if="mensajeCorreo !== ''">
+        {{ mensajeCorreo }}
+      </small>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="container">
+      <h2>GameZone.</h2>
 
-        <div class="footer-top">
-          <div class="footer-brand">
-            <h2>3legant.</h2>
-            <span class="footer-divider"></span>
-            <p>Gift & Decoration Store</p>
-          </div>
+      <nav>
+        <a href="#">Inicio</a>
+        <a href="#">Tienda</a>
+        <a href="#">Productos</a>
+        <a href="#">Contacto</a>
+      </nav>
 
-          <nav class="footer-nav">
-            <a href="#">Home</a>
-            <a href="#">Shop</a>
-            <a href="#">Product</a>
-            <a href="#">Blog</a>
-            <a href="#">Contact Us</a>
-          </nav>
-        </div>
-
-        <div class="footer-bottom">
-          <div class="footer-bottom-left">
-            <p>Copyright © 2023 3legant. All rights reserved</p>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
-          </div>
-
-          <div class="footer-social">
-            <a href="#"><i class='bx bxl-instagram'></i></a>
-            <a href="#"><i class='bx bxl-facebook'></i></a>
-            <a href="#"><i class='bx bxl-youtube'></i></a>
-          </div>
-        </div>
-
-      </div>
+      <p>Copyright © 2026 GameZone. Todos los derechos reservados.</p>
     </footer>
 
   </div>
