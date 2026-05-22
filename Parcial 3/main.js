@@ -1,151 +1,150 @@
+// Se toma createApp desde Vue.
 const { createApp } = Vue;
 
 createApp({
+  // data guarda la información principal de la página.
   data() {
     return {
-      showTopbar: true,
-      cartCount: 2,
-      email: '',
-      newsletterMessage: '',
+      mostrarBarra: true,
+      carrito: 2,
+      correo: '',
+      mensajeCorreo: '',
 
-      selectedCategory: 'all',
-      selectedPrice: 'all',
+      categoriaSeleccionada: 'all',
+      precioSeleccionado: 'all',
+      ordenSeleccionado: 'normal',
 
-      visibleCount: 6,
-
-      products: [
+      productos: [
         {
           id: 1,
-          name: 'Off-white Pillow',
-          price: '7.99',
-          oldPrice: '13.00',
-          category: 'living',
-          isNew: true,
-          discount: 50,
-          image: 'img/pillow.png',
-          description: 'Super-soft cushion cover in off-white with a tactile pattern that enhances the different tones in the pile and base.'
+          nombre: 'Control Pro RGB',
+          precio: 79.99,
+          precioAnterior: 119.99,
+          categoria: 'accesorios',
+          nuevo: true,
+          descuento: 30,
+          imagen: '',
+          descripcion: 'Control inalámbrico con luces RGB y agarre cómodo para largas partidas.'
         },
         {
           id: 2,
-          name: 'Table Lamp',
-          price: '39.99',
-          oldPrice: '',
-          category: 'decor',
-          isNew: true,
-          discount: null,
-          image: 'img/lamp.png',
-          description: 'Like small jewels in shiny brass and gray clear glass, a mood light that creates exciting shadows on walls and ceilings'
+          nombre: 'Headset Gamer X',
+          precio: 59.99,
+          precioAnterior: null,
+          categoria: 'accesorios',
+          nuevo: true,
+          descuento: null,
+          imagen: "https://media.falabella.com/falabellaCO/129884072_01/w=1500,h=1500,fit=cover",
+          descripcion: 'Audífonos gamer con sonido envolvente y micrófono flexible.'
         },
         {
           id: 3,
-          name: 'White Drawer unit',
-          price: '89.99',
-          oldPrice: '',
-          category: 'bedroom',
-          isNew: false,
-          discount: null,
-          image: 'img/drawer.png',
-          description: 'Super-soft cushion cover in off-white with a tactile pattern that enhances the different tones in the pile and base.'
+          nombre: 'Consola Nova X',
+          precio: 499.99,
+          precioAnterior: null,
+          categoria: 'consolas',
+          nuevo: false,
+          descuento: null,
+          imagen: 'img/consola.png',
+          descripcion: 'Consola de nueva generación con gráficos 4K y carga rápida.'
         },
         {
           id: 4,
-          name: 'Cozy Sofa',
-          price: '299.00',
-          oldPrice: '',
-          category: 'living',
-          isNew: true,
-          discount: null,
-          image: 'img/sofa.png',
-          description: 'Easy transportation was the goal when we created this comfy loveseat with durable beige polyester fabric.'
+          nombre: 'Silla Gamer Neon',
+          precio: 299.99,
+          precioAnterior: null,
+          categoria: 'setup',
+          nuevo: true,
+          descuento: null,
+          imagen: 'img/silla.png',
+          descripcion: 'Silla ergonómica con diseño gamer y soporte lumbar.'
         },
         {
           id: 5,
-          name: 'Bamboo Basket',
-          price: '9.99',
-          oldPrice: '',
-          category: 'decor',
-          isNew: false,
-          discount: null,
-          image: 'img/basket.png',
-          description: 'With its soft shape and color, this spacious basket is just as decorative wherever you choose to put it.'
+          nombre: 'Cyber Racing 2099',
+          precio: 49.99,
+          precioAnterior: null,
+          categoria: 'juegos',
+          nuevo: false,
+          descuento: null,
+          imagen: 'img/juego.png',
+          descripcion: 'Juego de carreras futuristas con pistas de neón y modo online.'
         },
         {
           id: 6,
-          name: 'Black Tray table',
-          price: '19.19',
-          oldPrice: '',
-          category: 'decor',
-          isNew: false,
-          discount: null,
-          image: 'img/tray-table.png',
-          description: 'Easy to love at a price that’s hard to resist. Buy one or buy a few and make every space where you sit more convenient.'
+          nombre: 'Teclado Mecánico RGB',
+          precio: 89.99,
+          precioAnterior: null,
+          categoria: 'setup',
+          nuevo: false,
+          descuento: null,
+          imagen: 'img/teclado.png',
+          descripcion: 'Teclado mecánico con iluminación RGB y switches rápidos.'
         }
       ]
     };
   },
 
+  // computed filtra los productos automáticamente.
   computed: {
-    filteredProducts() {
-      let list = [...this.products];
+    productosFiltrados() {
+      let lista = [...this.productos];
 
-      if (this.selectedCategory !== 'all') {
-        list = list.filter(product => product.category === this.selectedCategory);
+      // Filtro por categoría.
+      if (this.categoriaSeleccionada !== 'all') {
+        lista = lista.filter(producto => producto.categoria === this.categoriaSeleccionada);
       }
 
-      if (this.selectedPrice === '0-20') {
-        list = list.filter(product => parseFloat(product.price) <= 20);
-      } else if (this.selectedPrice === '20-100') {
-        list = list.filter(product => {
-          const price = parseFloat(product.price);
-          return price > 20 && price <= 100;
-        });
-      } else if (this.selectedPrice === '100+') {
-        list = list.filter(product => parseFloat(product.price) > 100);
+      // Filtro por precio.
+      if (this.precioSeleccionado === 'bajo') {
+        lista = lista.filter(producto => producto.precio <= 100);
       }
 
-      return list;
-    },
+      if (this.precioSeleccionado === 'medio') {
+        lista = lista.filter(producto => producto.precio > 100 && producto.precio <= 400);
+      }
 
-    visibleProducts() {
-      return this.filteredProducts.slice(0, this.visibleCount);
+      if (this.precioSeleccionado === 'alto') {
+        lista = lista.filter(producto => producto.precio > 400);
+      }
+
+      // Ordenar por precio menor.
+      if (this.ordenSeleccionado === 'menor') {
+        lista.sort((a, b) => a.precio - b.precio);
+      }
+
+      // Ordenar por precio mayor.
+      if (this.ordenSeleccionado === 'mayor') {
+        lista.sort((a, b) => b.precio - a.precio);
+      }
+
+      return lista;
     }
   },
 
+  // methods guarda las funciones que usan los botones.
   methods: {
-    closeTopbar() {
-      this.showTopbar = false;
+    cerrarBarra() {
+      this.mostrarBarra = false;
     },
 
-    addToCart(product) {
-      this.cartCount++;
-      alert(product.name + ' added to cart');
+    agregarCarrito(producto) {
+      this.carrito++;
+      alert(producto.nombre + ' fue añadido al carrito');
     },
 
-    toggleWishlist(product) {
-      alert(product.name + ' added to wishlist');
+    agregarWishlist(producto) {
+      alert(producto.nombre + ' fue añadido a wishlist');
     },
 
-    showMore() {
-      this.visibleCount += 2;
-    },
-
-    subscribeEmail() {
-      if (this.email.trim() === '') {
-        this.newsletterMessage = 'Please enter your email.';
+    registrarCorreo() {
+      if (this.correo.trim() === '') {
+        this.mensajeCorreo = 'Escribe tu correo primero.';
         return;
       }
 
-      this.newsletterMessage = 'Thanks for subscribing!';
-      this.email = '';
-    }
-  },
-
-  watch: {
-    selectedCategory() {
-      this.visibleCount = 6;
-    },
-    selectedPrice() {
-      this.visibleCount = 6;
+      this.mensajeCorreo = 'Registro exitoso. ¡Bienvenido a GameZone!';
+      this.correo = '';
     }
   }
 }).mount('#app');
