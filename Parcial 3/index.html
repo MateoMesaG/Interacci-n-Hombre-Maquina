@@ -1,328 +1,222 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Droguería SaludPlus</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3legant - Shop Page</title>
 
-  <!-- Bootstrap -->
-  <link 
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-    rel="stylesheet"
-  >
+  <!-- Fuente parecida al Figma -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- CSS propio -->
+  <!-- Iconos -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+  <!-- Vue -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <div id="app">
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg bg-white border-bottom">
-      <div class="container">
-        <a class="navbar-brand fw-bold" href="#">
-          💊 SaludPlus
-        </a>
+    <!-- Barra superior -->
+    <div class="topbar" v-if="showTopbar">
+      <div class="topbar-content">
+        <p>
+          <i class='bx bx-purchase-tag'></i>
+          <span>30% off storewide — Limited time!</span>
+          <a href="#">Shop Now <i class='bx bx-right-arrow-alt'></i></a>
+        </p>
 
-        <button 
-          class="navbar-toggler" 
-          type="button" 
-          data-bs-toggle="collapse" 
-          data-bs-target="#menu"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <button class="topbar-close" @click="closeTopbar">×</button>
+      </div>
+    </div>
 
-        <div class="collapse navbar-collapse" id="menu">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a href="#inicio" class="nav-link">Inicio</a>
-            </li>
+    <!-- Header -->
+    <header class="header">
+      <div class="container header-content">
+        <div class="logo">3legant.</div>
 
-            <li class="nav-item">
-              <a href="#productos" class="nav-link">Productos</a>
-            </li>
+        <nav class="nav desktop-nav">
+          <a href="#" class="active">Home</a>
+          <a href="#">Shop</a>
+          <a href="#">Product</a>
+          <a href="#">Contact Us</a>
+        </nav>
 
-            <li class="nav-item">
-              <a href="#carrito" class="nav-link">Carrito</a>
-            </li>
-
-            <li class="nav-item">
-              <a href="#pedido" class="nav-link">Pedido</a>
-            </li>
-          </ul>
-
-          <button class="btn btn-dark ms-lg-3">
-            Carrito {{ carrito.length }}
-          </button>
+        <div class="header-icons">
+          <a href="#"><i class='bx bx-search'></i></a>
+          <a href="#"><i class='bx bx-user-circle'></i></a>
+          <a href="#"><i class='bx bx-heart'></i></a>
+          <a href="#" class="cart-icon">
+            <i class='bx bx-shopping-bag'></i>
+            <span class="cart-count">{{ cartCount }}</span>
+          </a>
         </div>
       </div>
-    </nav>
+    </header>
 
-
-    <!-- INICIO -->
-    <section id="inicio" class="hero">
+    <!-- Hero -->
+    <section class="hero">
       <div class="container">
-        <div class="row align-items-center">
-
-          <div class="col-md-6">
-            <h1>Droguería SaludPlus</h1>
-
-            <p>
-              Encuentra productos de salud, medicamentos básicos y artículos
-              de cuidado personal de forma rápida y sencilla.
-            </p>
-
-            <a href="#productos" class="btn btn-dark">
-              Ver productos
-            </a>
+        <div class="hero-box">
+          <div class="hero-overlay">
+            <p class="breadcrumb">Home <span>›</span> <strong>Shop</strong></p>
+            <h1>Shop Page</h1>
+            <p class="hero-subtitle">Let’s design the place you always imagined.</p>
           </div>
-
-          <div class="col-md-6">
-            <div class="wireframe grande">
-              <span>Imagen droguería</span>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
 
+    <!-- Shop -->
+    <main class="shop-section">
+      <div class="container">
 
-    <!-- INFORMACIÓN -->
-    <section class="seccion-blanca">
-      <div class="container text-center">
+        <!-- filtros -->
+        <div class="shop-toolbar">
+          <div class="filters-left">
+            <div class="filter-group">
+              <label>CATEGORIES</label>
+              <select v-model="selectedCategory">
+                <option value="all">Living Room</option>
+                <option value="living">Living Room</option>
+                <option value="bedroom">Bedroom</option>
+                <option value="decor">Decor</option>
+              </select>
+            </div>
 
-        <h2>¿Por qué elegirnos?</h2>
-
-        <p class="texto-centro">
-          Nuestra droguería busca facilitar el acceso a productos de salud
-          mediante una página clara y fácil de usar.
-        </p>
-
-        <div class="row align-items-center mt-4">
-
-          <div class="col-md-5">
-            <div class="wireframe mediana">
-              <span>Imagen</span>
+            <div class="filter-group">
+              <label>PRICE</label>
+              <select v-model="selectedPrice">
+                <option value="all">All Price</option>
+                <option value="0-20">$0 - $20</option>
+                <option value="20-100">$20 - $100</option>
+                <option value="100+">$100+</option>
+              </select>
             </div>
           </div>
 
-          <div class="col-md-7 text-start">
-            <p>✔ Atención rápida para los usuarios.</p>
-            <p>✔ Productos organizados por tarjetas.</p>
-            <p>✔ Carrito básico para agregar productos.</p>
-            <p>✔ Formulario para solicitar información.</p>
-          </div>
+          <div class="toolbar-right">
+            <div class="sort-box">
+              <span>Sort by</span>
+              <i class='bx bx-chevron-down'></i>
+            </div>
 
+            <div class="view-switch">
+              <button><i class='bx bxs-grid'></i></button>
+              <button><i class='bx bx-grid-alt'></i></button>
+              <button class="active"><i class='bx bx-pause'></i></button>
+              <button><i class='bx bx-menu'></i></button>
+            </div>
+          </div>
         </div>
 
-      </div>
-    </section>
+        <!-- productos -->
+        <section class="products-grid">
+          <article class="product-item" v-for="product in visibleProducts" :key="product.id">
 
+            <div class="product-image-box">
+              <span class="badge new" v-if="product.isNew">NEW</span>
+              <span class="badge discount" v-if="product.discount">-{{ product.discount }}%</span>
+              <img :src="product.image" :alt="product.name">
+            </div>
 
-    <!-- PRODUCTOS -->
-    <section id="productos" class="seccion-gris">
-      <div class="container text-center">
+            <div class="product-info">
+              <div class="stars">★★★★★</div>
 
-        <h2>Productos disponibles</h2>
-
-        <p class="texto-centro">
-          Agrega al carrito los productos que deseas comprar.
-        </p>
-
-        <div class="row g-4 mt-3">
-
-          <div 
-            class="col-md-4"
-            v-for="producto in productos"
-            :key="producto.id"
-          >
-            <div class="card h-100">
-
-              <div class="wireframe producto-img">
-                <span>{{ producto.categoria }}</span>
-              </div>
-
-              <div class="card-body">
-                <h5 class="card-title">
-                  {{ producto.nombre }}
-                </h5>
-
-                <p class="card-text">
-                  {{ producto.descripcion }}
-                </p>
-
-                <h6>
-                  ${{ producto.precio }}
-                </h6>
-
-                <button 
-                  class="btn btn-dark w-100"
-                  @click="agregarProducto(producto)"
-                >
-                  Agregar al carrito
+              <div class="title-row">
+                <h3>{{ product.name }}</h3>
+                <button class="wishlist-mobile" @click="toggleWishlist(product)">
+                  <i class='bx bx-heart'></i>
                 </button>
               </div>
 
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- CARRITO -->
-    <section id="carrito" class="seccion-blanca">
-      <div class="container">
-
-        <h2 class="text-center">Carrito de compras</h2>
-
-        <div class="caja-carrito mt-4">
-
-          <p v-if="carrito.length === 0" class="text-center">
-            No hay productos agregados.
-          </p>
-
-          <div v-else>
-
-            <div 
-              class="item-carrito"
-              v-for="(producto, index) in carrito"
-              :key="index"
-            >
-              <div>
-                <strong>{{ producto.nombre }}</strong>
-                <p class="m-0">${{ producto.precio }}</p>
+              <div class="price-row">
+                <span class="current-price">${{ product.price }}</span>
+                <span class="old-price" v-if="product.oldPrice">${{ product.oldPrice }}</span>
               </div>
 
-              <button 
-                class="btn btn-outline-danger btn-sm"
-                @click="quitarProducto(index)"
-              >
-                Quitar
+              <p class="description">{{ product.description }}</p>
+
+              <button class="btn-cart" @click="addToCart(product)">Add to cart</button>
+
+              <button class="wishlist-btn" @click="toggleWishlist(product)">
+                <i class='bx bx-heart'></i> Wishlist
               </button>
             </div>
+          </article>
+        </section>
 
-            <hr>
-
-            <h4 class="text-end">
-              Total: ${{ total }}
-            </h4>
-
-            <button 
-              class="btn btn-secondary"
-              @click="vaciarCarrito"
-            >
-              Vaciar carrito
-            </button>
-
-          </div>
-
+        <div class="show-more-wrapper" v-if="visibleCount < filteredProducts.length">
+          <button class="show-more-btn" @click="showMore">Show more</button>
         </div>
 
       </div>
-    </section>
+    </main>
 
+    <!-- Newsletter -->
+    <section class="newsletter">
+      <div class="newsletter-inner">
+        <div class="newsletter-content">
+          <h2>Join Our Newsletter</h2>
+          <p>Sign up for deals, new products and promotions</p>
 
-    <!-- FORMULARIO -->
-    <section id="pedido" class="seccion-gris">
-      <div class="container">
-        <div class="row align-items-center">
-
-          <div class="col-md-6">
-            <div class="wireframe formulario-img">
-              <span>Imagen formulario</span>
+          <form class="newsletter-form" @submit.prevent="subscribeEmail">
+            <div class="input-row">
+              <i class='bx bx-envelope'></i>
+              <input type="email" v-model="email" placeholder="Email address">
+              <button type="submit">Signup</button>
             </div>
-          </div>
+          </form>
 
-          <div class="col-md-6">
-            <div class="form-box">
-
-              <h2>Solicita información</h2>
-
-              <p>
-                Llena el formulario para consultar disponibilidad o realizar
-                una solicitud.
-              </p>
-
-              <form @submit.prevent="enviarFormulario">
-
-                <input 
-                  type="text"
-                  class="form-control mb-3"
-                  placeholder="Nombre completo"
-                  v-model="nombre"
-                  required
-                >
-
-                <input 
-                  type="email"
-                  class="form-control mb-3"
-                  placeholder="Correo electrónico"
-                  v-model="correo"
-                  required
-                >
-
-                <input 
-                  type="text"
-                  class="form-control mb-3"
-                  placeholder="Teléfono"
-                  v-model="telefono"
-                  required
-                >
-
-                <textarea 
-                  class="form-control mb-3"
-                  placeholder="Mensaje"
-                  v-model="mensaje"
-                ></textarea>
-
-                <button class="btn btn-dark w-100">
-                  Enviar solicitud
-                </button>
-
-              </form>
-
-              <div 
-                class="alert alert-success mt-3"
-                v-if="mensajeEnviado"
-              >
-                Solicitud enviada correctamente.
-              </div>
-
-            </div>
-          </div>
-
+          <small class="newsletter-msg" v-if="newsletterMessage">{{ newsletterMessage }}</small>
         </div>
       </div>
     </section>
 
-
-    <!-- FOOTER -->
+    <!-- Footer -->
     <footer class="footer">
-      <div class="container text-center">
-        <h4>Droguería SaludPlus</h4>
-        <p>Proyecto académico con Vue.js, Bootstrap, HTML y CSS.</p>
+      <div class="container">
+
+        <div class="footer-top">
+          <div class="footer-brand">
+            <h2>3legant.</h2>
+            <span class="footer-divider"></span>
+            <p>Gift & Decoration Store</p>
+          </div>
+
+          <nav class="footer-nav">
+            <a href="#">Home</a>
+            <a href="#">Shop</a>
+            <a href="#">Product</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact Us</a>
+          </nav>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="footer-bottom-left">
+            <p>Copyright © 2023 3legant. All rights reserved</p>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+          </div>
+
+          <div class="footer-social">
+            <a href="#"><i class='bx bxl-instagram'></i></a>
+            <a href="#"><i class='bx bxl-facebook'></i></a>
+            <a href="#"><i class='bx bxl-youtube'></i></a>
+          </div>
+        </div>
+
       </div>
     </footer>
 
   </div>
 
-
-  <!-- Vue.js -->
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
-  <!-- Bootstrap JS -->
-  <script 
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-  </script>
-
-  <!-- JavaScript propio -->
   <script src="main.js"></script>
-
 </body>
 </html>
