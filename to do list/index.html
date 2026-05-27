@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tareas Vue</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app" class="contenedor">
+
+    <h1>Lista de Tareas</h1>
+
+    <div class="formulario">
+      <input 
+        type="text" 
+        v-model="nuevaTarea" 
+        placeholder="Escribe una tarea"
+      >
+
+      <select v-model="categoria">
+        <option value="Importante">Importante</option>
+        <option value="Urgente">Urgente</option>
+        <option value="Normal">Normal</option>
+      </select>
+
+      <button @click="agregarTarea">Agregar</button>
+    </div>
+
+    <div class="secciones">
+
+      <div class="caja">
+        <h2>Tareas pendientes</h2>
+
+        <h3>Importantes</h3>
+        <div 
+          class="tarea" 
+          v-for="tarea in tareasImportantes" 
+          :key="tarea.id"
+        >
+          <span>{{ tarea.texto }}</span>
+          <button @click="completarTarea(tarea)">Realizada</button>
+        </div>
+
+        <h3>Urgentes</h3>
+        <div 
+          class="tarea" 
+          v-for="tarea in tareasUrgentes" 
+          :key="tarea.id"
+        >
+          <span>{{ tarea.texto }}</span>
+          <button @click="completarTarea(tarea)">Realizada</button>
+        </div>
+
+        <h3>Normales</h3>
+        <div 
+          class="tarea" 
+          v-for="tarea in tareasNormales" 
+          :key="tarea.id"
+        >
+          <span>{{ tarea.texto }}</span>
+          <button @click="completarTarea(tarea)">Realizada</button>
+        </div>
+      </div>
+
+      <div class="caja">
+        <h2>Tareas realizadas</h2>
+
+        <div 
+          class="tarea realizada" 
+          v-for="tarea in tareasRealizadas" 
+          :key="tarea.id"
+        >
+          <span>{{ tarea.texto }}</span>
+          <button @click="eliminarTarea(tarea)">Eliminar</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Librería Vue.js -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <!-- Archivo JavaScript -->
+  <script src="main.js"></script>
+
+</body>
+</html>

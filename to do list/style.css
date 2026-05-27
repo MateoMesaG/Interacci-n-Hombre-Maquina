@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #e9eef5;
+}
+
+.contenedor {
+  width: 90%;
+  max-width: 1000px;
+  margin: 30px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #bbb;
+}
+
+h1 {
+  text-align: center;
+  color: #222;
+}
+
+.formulario {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+input, select {
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+}
+
+input {
+  flex: 1;
+}
+
+button {
+  padding: 10px 14px;
+  background: #2d6cdf;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4fa3;
+}
+
+.secciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.caja {
+  background: #f7f7f7;
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+h3 {
+  background: #ddd;
+  padding: 8px;
+  border-radius: 5px;
+  color: #333;
+}
+
+.tarea {
+  background: white;
+  margin: 10px 0;
+  padding: 10px;
+  border-left: 5px solid #2d6cdf;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px;
+}
+
+.realizada {
+  border-left: 5px solid #2ecc71;
+  text-decoration: line-through;
+}
