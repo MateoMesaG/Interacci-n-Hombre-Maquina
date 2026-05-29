@@ -1,42 +1,47 @@
-body {
-  margin: 0;
-  background-color: #1e1e2f;
+* {
+  box-sizing: border-box;
   font-family: Arial, sans-serif;
-  color: white;
 }
 
-.caja {
-  width: 500px;
-  margin: 50px auto;
-  background-color: #2b2b40;
+body {
+  margin: 0;
+  background: #e9eef5;
+}
+
+.contenedor {
+  width: 90%;
+  max-width: 1000px;
+  margin: 30px auto;
+  background: white;
   padding: 25px;
   border-radius: 12px;
-  border: 2px solid #44445f;
+  box-shadow: 0 0 10px #bbb;
 }
 
 h1 {
   text-align: center;
-  color: #ffffff;
+  color: #222;
 }
 
-h2 {
-  color: #feca57;
-  margin-top: 25px;
+.formulario {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+input, select {
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
 }
 
 input {
-  width: 68%;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  background-color: #ffffff;
-  color: #000000;
+  flex: 1;
 }
 
 button {
-  padding: 10px;
-  margin-left: 5px;
-  background-color: #ff6b6b;
+  padding: 10px 14px;
+  background: #2d6cdf;
   color: white;
   border: none;
   border-radius: 6px;
@@ -44,27 +49,46 @@ button {
 }
 
 button:hover {
-  background-color: #ee5253;
+  background: #1d4fa3;
 }
 
-ul {
-  padding: 0;
+.secciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
 }
 
-li {
-  list-style: none;
-  background-color: #3b3b55;
+.caja {
+  background: #f7f7f7;
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+h3 {
+  background: #ddd;
+  padding: 8px;
+  border-radius: 5px;
+  color: #333;
+}
+
+.tarea {
+  background: white;
   margin: 10px 0;
-  padding: 12px;
+  padding: 10px;
+  border-left: 5px solid #2d6cdf;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 6px;
-  border-left: 5px solid #feca57;
 }
 
-li button {
-  float: right;
-  background-color: #1dd1a1;
-}
-
-li button:hover {
-  background-color: #10ac84;
+.realizada {
+  border-left: 5px solid #2ecc71;
+  text-decoration: line-through;
 }
